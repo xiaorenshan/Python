@@ -9,7 +9,7 @@ while i <= 50:
     Coupon_list.append( ''.join(sample(element,10)))
     i += 1
 
-connect = pymysql.connect(host='47.94.85.128',port=3306,user='test',password='P@ssw0rd',db='test',use_unicode=True)
+connect = pymysql.connect(host='1.1.1.1',port=3306,user='user',password='password',db='test',use_unicode=True)
 cursor = connect.cursor()
 sql = ("insert into Coupon (id,Number) values ('%d', '%s')")
 i = 0
