@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 BASE_PATH = sys.path[0]
 url = "https://www.piaotian.com/html/0/757/"
-
+##url = "https://www.piaotian.com/html/0/49/"
 def GetHtml(url):
     html = urllib.request.urlopen(url).read().decode('gbk')
     soup = BeautifulSoup(html, 'lxml')
