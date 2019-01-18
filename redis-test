@@ -1,0 +1,30 @@
+#测试redis连通性，不可用时输出当前时间，接收两个参数。
+import sys
+import redis
+import time
+
+
+#pool = redis.ConnectionPool(host='172.25.1.62', port=6379, password='', db=0)
+value = 'bar'
+exec_time = int(sys.argv[1]) ##尝试写入多少条数据
+interval = int(sys.argv[2])  ##时间间隔
+i = 0
+
+
+def timestamp(time_num):
+    time_stamp = float(time_num/1000)
+    time_array = time.localtime(time_stamp)
+    other_style_time = time.strftime("%Y-%m-%d %H:%M:%S", time_array)
+    return other_style_time
+
+
+while i < exec_time:
+        now_time = int(round(time.time()*1000))
+        try:
+            redis_c = redis.StrictRedis(host='172.25.1.62', port=6379, password='', db=0)
+            redis_c.set(name=now_time, value=value, ex=100)    ###100s过期时间
+        except:
+            print('server unavailable  %s，  timestamp is %s' % (timestamp(now_time), now_time))
+            pass
+        time.sleep(interval)
+        i += 1
